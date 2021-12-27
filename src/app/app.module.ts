@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { InputProgramComponent } from './src/app/program-generator/input-program/input-program.component';
+import { AppRoutes } from './app.routes';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    InputProgramComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, RouterModule.forRoot(AppRoutes)],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
