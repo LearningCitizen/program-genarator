@@ -8,7 +8,6 @@ export const AppRoutes: Routes = [
   },
   {
     path: 'programGenerator',
-    loadChildren:
-      './program-generator/program-generator.module#ProgramGeneratorModule',
+    loadChildren: () => import('./program-generator/program-generator.module').then(m => m.ProgramGeneratorModule)
   },
 ];
