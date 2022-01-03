@@ -3,8 +3,9 @@
     <h1>GPS</h1>
     <h2>Générateur de Programmes pour la Sonorisation</h2>
   </div>
-  <mat-tab-group>
-    <mat-tab label="Input">Formulaire</mat-tab>
-    <mat-tab label="Generator">Générateur</mat-tab>
-  </mat-tab-group>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of links"
+       (click)="activeLink = link"
+       [active]="activeLink == link" [href]="link.value"> {{ link.label }} </a>
+  </nav>
 </div>
