@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  links = [{value: '/programGenerator/inputProgram', label: 'Formulaire'} ,{value: '/programGenerator/generator', label: 'Générateur'}]
-  activeLink = this.links[0]
+  
 
   constructor() { }
 
