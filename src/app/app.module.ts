@@ -8,6 +8,8 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE_FR } from './app-constantes';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     CommonModule,
     MatTabsModule,
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: MAT_DATE_LOCALE_FR}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

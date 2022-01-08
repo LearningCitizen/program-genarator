@@ -1,0 +1,1 @@
+export const MAT_DATE_LOCALE_FR = 'fr-FR'
