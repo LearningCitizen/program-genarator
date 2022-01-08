@@ -34,6 +34,7 @@ export class InputProgramComponent implements OnInit {
                     end: ['', Validators.required],
                 }),
                 selectedDays: ['', Validators.required, SharedValidators.notBlank],
+                rolesNumber: [1, Validators.required]
             },
             {
                 validators: [],
