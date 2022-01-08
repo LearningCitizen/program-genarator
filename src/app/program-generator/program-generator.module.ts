@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputProgramComponent } from './input-program/input-program.component';
-import { GeneratorComponent } from './generator/generator.component';
-import { RouterModule } from '@angular/router';
-import { ProgramGeneratorRoutes } from './program-generator.routes';
+import { NgModule } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
+import { GeneratorComponent } from './generator/generator.component';
+import { InputProgramComponent } from './input-program/input-program.component';
+import { ProgramGeneratorRoutes } from './program-generator.routes';
 
 @NgModule({
   declarations: [InputProgramComponent, GeneratorComponent],
@@ -17,7 +19,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
   ],
   providers: [FormBuilder],
 })

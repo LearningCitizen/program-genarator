@@ -1,13 +1,42 @@
-<div [formGroup]="form" novalidate id="programForm">
-  <div formGroupName="rangeDate">
-    <mat-form-field appearance="fill">
-      <mat-label>Période pour programme</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date" formControlName="start" />
-        <input matEndDate placeholder="End date" formControlName="end"/>
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
+<div class="content">
+    <div [formGroup]="form" novalidate id="programForm" class="form1">
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Participants du programme</mat-label>
+            <textarea
+                matInput
+                placeholder="Participants du programme"
+                formControlName="participants"
+            ></textarea>
+        </mat-form-field>
+        <div class="field" formGroupName="rangeDate">
+            <mat-form-field appearance="fill">
+                <mat-label>Période pour programme</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input
+                        matStartDate
+                        placeholder="Start date"
+                        formControlName="start"
+                    />
+                    <input
+                        matEndDate
+                        placeholder="End date"
+                        formControlName="end"
+                    />
+                </mat-date-range-input>
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </div>
+        <button
+            mat-button
+            color="primary"
+            class="field"
+            (click)="onValidateForm1()"
+        >
+            Générer
+        </button>
+    </div>
 </div>

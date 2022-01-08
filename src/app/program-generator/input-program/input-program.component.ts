@@ -22,6 +22,7 @@ export class InputProgramComponent implements OnInit {
   initForm() {
     this.form = this.fb.group(
       {
+        participants: [''],
         rangeDate: this.fb.group({
           start: ['', Validators.required],
           end: ['', Validators.required],
@@ -32,5 +33,12 @@ export class InputProgramComponent implements OnInit {
         updateOn: 'blur',
       }
     );
+  }
+
+  onValidateForm1(){
+    // console.log('rangeDate : '+JSON.stringify(this.form.get('rangeDate')))
+    console.log('start : '+this.form.get('rangeDate')?.get('start')?.value)
+    console.log('end : '+this.form.get('rangeDate')?.get('end')?.value)
+    console.log('participants : '+this.form.get('participants')?.value)
   }
 }
