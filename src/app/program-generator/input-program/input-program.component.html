@@ -8,8 +8,8 @@
                 formControlName="participants"
             ></textarea>
         </mat-form-field>
-        <div class="field" formGroupName="rangeDate">
-            <mat-form-field appearance="fill">
+        <div formGroupName="rangeDate">
+            <mat-form-field class="field" appearance="fill">
                 <mat-label>Période pour programme</mat-label>
                 <mat-date-range-input [rangePicker]="picker">
                     <input
@@ -30,13 +30,24 @@
                 <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
         </div>
-        <button
-            mat-button
-            color="primary"
-            class="field"
-            (click)="onValidateForm1()"
-        >
-            Générer
-        </button>
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Jours du programme</mat-label>
+            <mat-select formControlName="selectedDays" multiple>
+                <mat-option
+                    *ngFor="let day of weekDays; let index = index"
+                    [value]="index"
+                >
+                    {{ day }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
+    <button
+        mat-button
+        color="primary"
+        class="field"
+        (click)="onValidateForm1()"
+    >
+        Générer
+    </button>
 </div>
