@@ -1,27 +1,29 @@
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
+import { LOCALE_FR } from './app-constantes';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { CoreModule } from './core/core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { MAT_DATE_LOCALE_FR } from './app-constantes';
+
+registerLocaleData(localeFr);
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(AppRoutes),
-    CoreModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    MatTabsModule,
-  ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: MAT_DATE_LOCALE_FR}],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(AppRoutes),
+        CoreModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        MatTabsModule,
+    ],
+    providers: [{ provide: MAT_DATE_LOCALE, useValue: LOCALE_FR }, DatePipe],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

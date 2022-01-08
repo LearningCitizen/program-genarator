@@ -1,1 +1,1 @@
-export const MAT_DATE_LOCALE_FR = 'fr-FR'
+export const LOCALE_FR = 'fr-FR'

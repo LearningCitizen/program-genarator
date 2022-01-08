@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { addDays } from 'date-fns';
 import { SharedValidators } from 'src/app/shared/utils/shared-validators';
+import { InputProgramService } from './input-program.service';
 
 @Component({
     selector: 'app-input-program',
@@ -20,7 +21,10 @@ export class InputProgramComponent implements OnInit {
         'Samedi',
     ];
     programDates: Array<Date> = [];
-    constructor(private fb: FormBuilder) {}
+    constructor(
+        private fb: FormBuilder,
+        private inputProgramService: InputProgramService
+    ) {}
 
     ngOnInit(): void {
         this.initForm();
@@ -56,7 +60,10 @@ export class InputProgramComponent implements OnInit {
         console.log('participants : ' + this.form.get('participants')?.value);
 
         this.initProgramDates();
-        console.log('programDates : ' + JSON.stringify(this.programDates));
+        console.log('programDates : ');
+        this.programDates.forEach((date) =>
+            console.log(this.inputProgramService.toDateFr(date))
+        );
     }
 
     initProgramDates() {
