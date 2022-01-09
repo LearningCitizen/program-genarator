@@ -44,8 +44,6 @@ export class InputProgramComponent implements OnInit {
 
     ngOnInit(): void {
         this.initInitialForm();
-        let arr = Array(5);
-        console.log('arr : ' + JSON.stringify(arr));
     }
 
     initInitialForm() {
