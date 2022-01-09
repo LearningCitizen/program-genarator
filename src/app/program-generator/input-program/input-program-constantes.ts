@@ -4,4 +4,6 @@ export const START_FORM_CONTROL = 'start';
 export const END_FORM_CONTROL = 'end';
 export const PARTICIPANTS_FORM_CONTROL = 'participants';
 export const SELECTED_DAYS_FORM_CONTROL = 'selectedDays';
-export const ROLESNUMBER_FORM_CONTROL = 'rolesNumber';
+export const ROLES_NUMBER_FORM_CONTROL = 'rolesNumber';
+export const INITIAL_FORM = 'initial';
+export const AVAILABILITY_FORM = 'availability';

@@ -1,63 +1,113 @@
 <div class="content">
     <h1>{{ title }}</h1>
-    <div [formGroup]="form" novalidate id="programForm" class="form1">
-        <mat-form-field class="field" appearance="fill">
-            <mat-label>Participants du programme</mat-label>
-            <textarea
-                matInput
-                placeholder="Participants du programme"
-                formControlName="participants"
-            ></textarea>
-        </mat-form-field>
-        <div formGroupName="rangeDate">
+    <div *ngIf="displayForm == 'initial'">
+        <div [formGroup]="form" novalidate id="initialForm" class="div_row">
             <mat-form-field class="field" appearance="fill">
-                <mat-label>Période pour programme</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                    <input
-                        matStartDate
-                        placeholder="Start date"
-                        formControlName="start"
-                    />
-                    <input
-                        matEndDate
-                        placeholder="End date"
-                        formControlName="end"
-                    />
-                </mat-date-range-input>
-                <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-label>Participants du programme</mat-label>
+                <textarea
+                    matInput
+                    placeholder="Participants du programme"
+                    formControlName="participants"
+                ></textarea>
+            </mat-form-field>
+            <div formGroupName="rangeDate">
+                <mat-form-field class="field" appearance="fill">
+                    <mat-label>Période pour programme</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input
+                            matStartDate
+                            placeholder="Start date"
+                            formControlName="start"
+                        />
+                        <input
+                            matEndDate
+                            placeholder="End date"
+                            formControlName="end"
+                        />
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+            <mat-form-field class="field" appearance="fill">
+                <mat-label>Jours du programme</mat-label>
+                <mat-select formControlName="selectedDays" multiple>
+                    <mat-option
+                        *ngFor="let day of weekDays; let index = index"
+                        [value]="index"
+                    >
+                        {{ day }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field" appearance="fill">
+                <mat-label>Nombre de rôles par jour</mat-label>
+                <input
+                    matInput
+                    placeholder="Nombre de rôles"
+                    formControlName="rolesNumber"
+                />
             </mat-form-field>
         </div>
-        <mat-form-field class="field" appearance="fill">
-            <mat-label>Jours du programme</mat-label>
-            <mat-select formControlName="selectedDays" multiple>
-                <mat-option
-                    *ngFor="let day of weekDays; let index = index"
-                    [value]="index"
-                >
-                    {{ day }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field class="field" appearance="fill">
-            <mat-label>Nombre de rôles par jour</mat-label>
-            <input
-                matInput
-                placeholder="Nombre de rôle"
-                formControlName="rolesNumber"
-            />
-        </mat-form-field>
+        <button
+            mat-button
+            color="primary"
+            class="field"
+            (click)="onValidateForm1()"
+            [disabled]="form.invalid"
+        >
+            Générer
+        </button>
     </div>
-    <button
-        mat-button
-        color="primary"
-        class="field"
-        (click)="onValidateForm1()"
-        [disabled]="form.invalid"
+    <div
+        *ngIf="displayForm == 'availability'"
+        [formGroup]="form"
+        novalidate
+        id="availabilityForm"
+        class="form1"
     >
-        Générer
-    </button>
+        <div
+            *ngFor="let progDate of programDates; let index = index"
+            class="div_row"
+        >
+            <mat-form-field class="field" appearance="fill">
+                <mat-label>Date</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="picker_index"
+                    [formControlName]="'pgmDate' + index"
+                />
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker_index"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker_index></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="field" appearance="fill">
+                <mat-label>Indsponibilités des participants</mat-label>
+                <mat-select
+                    [formControlName]="'unavailablePart' + index"
+                    multiple
+                >
+                    <mat-option
+                        *ngFor="let par of participants; let index = index"
+                        [value]="par"
+                    >
+                        {{ par }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field" appearance="fill">
+                <mat-label>Nombre de rôles</mat-label>
+                <input
+                    matInput
+                    placeholder="Nombre de rôles"
+                    [formControlName]="'rolesNumber' + index"
+                />
+            </mat-form-field>
+        </div>
+    </div>
 </div>

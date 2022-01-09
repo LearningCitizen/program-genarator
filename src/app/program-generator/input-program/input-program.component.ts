@@ -3,9 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { addDays } from 'date-fns';
 import { SharedValidators } from 'src/app/shared/utils/shared-validators';
 import {
+    AVAILABILITY_FORM,
     END_FORM_CONTROL,
+    INITIAL_FORM,
     PARTICIPANTS_FORM_CONTROL,
     RANGE_DATE_FORM_GROUP,
+    ROLES_NUMBER_FORM_CONTROL,
     SELECTED_DAYS_FORM_CONTROL,
     START_FORM_CONTROL,
 } from './input-program-constantes';
@@ -30,6 +33,8 @@ export class InputProgramComponent implements OnInit {
     programDates: Array<Date> = [];
     participants: Array<string> = [];
     title = 'Informations initiales du programme';
+    rolesNumber: number = 1;
+    displayForm = INITIAL_FORM;
 
     constructor(
         private fb: FormBuilder,
@@ -37,10 +42,10 @@ export class InputProgramComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.initForm();
+        this.initInitialForm();
     }
 
-    initForm() {
+    initInitialForm() {
         this.form = this.fb.group(
             {
                 participants: [
@@ -65,7 +70,10 @@ export class InputProgramComponent implements OnInit {
         if (this.form.valid) {
             this.initProgramDates();
             this.initParticipants();
+            this.initAvailabilityForm()
+            this.rolesNumber = this.form.get(ROLES_NUMBER_FORM_CONTROL)?.value;
             this.title = 'Indisponibilités des participants';
+            this.displayForm = AVAILABILITY_FORM;
             console.log('partici prop : ' + JSON.stringify(this.participants));
         }
     }
@@ -95,5 +103,17 @@ export class InputProgramComponent implements OnInit {
             .split('\n')
             .map((participant) => participant.trim())
             .filter((s) => s.length > 0);
+    }
+
+    initAvailabilityForm() {
+        this.form= this.fb.group({},{
+            validators: [],
+            updateOn: 'blur',
+        });
+        this.programDates.forEach((pgmDate, index) => {
+            this.form.addControl(`pgmDate${index}`, this.fb.control(pgmDate))
+            this.form.addControl(`unavailablePart${index}`, this.fb.control([]))
+            this.form.addControl(`rolesNumber${index}`, this.fb.control(this.rolesNumber))
+        })
     }
 }
