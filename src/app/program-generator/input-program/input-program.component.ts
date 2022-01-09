@@ -29,6 +29,7 @@ export class InputProgramComponent implements OnInit {
     ];
     programDates: Array<Date> = [];
     participants: Array<string> = [];
+    title = 'Informations initiales du programme';
 
     constructor(
         private fb: FormBuilder,
@@ -64,7 +65,8 @@ export class InputProgramComponent implements OnInit {
         if (this.form.valid) {
             this.initProgramDates();
             this.initParticipants();
-            console.log('partici prop : '+JSON.stringify(this.participants)); 
+            this.title = 'Indisponibilités des participants';
+            console.log('partici prop : ' + JSON.stringify(this.participants));
         }
     }
 
@@ -91,6 +93,7 @@ export class InputProgramComponent implements OnInit {
             this.form.get(PARTICIPANTS_FORM_CONTROL)?.value as string
         )
             .split('\n')
-            .map((participant) => participant.trim()).filter(s => s.length>0);
+            .map((participant) => participant.trim())
+            .filter((s) => s.length > 0);
     }
 }
