@@ -33,7 +33,8 @@ export class InputProgramComponent implements OnInit {
     programDates: Array<Date> = [];
     participants: Array<string> = [];
     title = 'Informations initiales du programme';
-    rolesNumber: number = 1;
+    rolesByDates: Array<number> = [];
+    unavailableParticipantsArray: any[] = [];
     displayForm = INITIAL_FORM;
 
     constructor(
@@ -43,6 +44,8 @@ export class InputProgramComponent implements OnInit {
 
     ngOnInit(): void {
         this.initInitialForm();
+        let arr = Array(5);
+        console.log('arr : ' + JSON.stringify(arr));
     }
 
     initInitialForm() {
@@ -70,8 +73,9 @@ export class InputProgramComponent implements OnInit {
         if (this.form.valid) {
             this.initProgramDates();
             this.initParticipants();
-            this.initAvailabilityForm()
-            this.rolesNumber = this.form.get(ROLES_NUMBER_FORM_CONTROL)?.value;
+            this.initRolesByDates();
+            this.updateUnavailablePartFromRoles();
+            this.initAvailabilityForm();
             this.title = 'Indisponibilités des participants';
             this.displayForm = AVAILABILITY_FORM;
             console.log('partici prop : ' + JSON.stringify(this.participants));
@@ -105,15 +109,51 @@ export class InputProgramComponent implements OnInit {
             .filter((s) => s.length > 0);
     }
 
+    initRolesByDates() {
+        this.programDates.forEach(() =>
+            this.rolesByDates.push(
+                this.form.get(ROLES_NUMBER_FORM_CONTROL)?.value
+            )
+        );
+    }
     initAvailabilityForm() {
-        this.form= this.fb.group({},{
-            validators: [],
-            updateOn: 'blur',
-        });
+        this.form = this.fb.group(
+            {},
+            {
+                validators: [],
+                updateOn: 'blur',
+            }
+        );
         this.programDates.forEach((pgmDate, index) => {
-            this.form.addControl(`pgmDate${index}`, this.fb.control(pgmDate))
-            this.form.addControl(`unavailablePart${index}`, this.fb.control([]))
-            this.form.addControl(`rolesNumber${index}`, this.fb.control(this.rolesNumber))
-        })
+            this.form.addControl(`pgmDate_${index}`, this.fb.control(pgmDate));
+            this.form.addControl(
+                `rolesNumber_${index}`,
+                this.fb.control(this.rolesByDates[index])
+            );
+            /* create unavailability for each roles */
+            Array.from({ length: this.rolesByDates[index] }).forEach(
+                (_, index2) =>
+                    this.form.addControl(
+                        `unavailablePart_${index}_${index2}`,
+                        this.fb.control([])
+                    )
+            );
+        });
+    }
+
+    updateUnavailablePartFromRoles() {
+        this.rolesByDates.forEach((roles: number) => {
+            this.unavailableParticipantsArray.push(
+                Array.from({ length: roles })
+            );
+        });
+    }
+
+    arrayOfRolesByDate(index: number) {
+        return Array(this.rolesByDates[index]);
+    }
+
+    onRolesChanges(index: number) {
+        this.form.get('rolesNumber_${index}');
     }
 }

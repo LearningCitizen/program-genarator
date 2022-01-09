@@ -78,7 +78,7 @@
                 <input
                     matInput
                     [matDatepicker]="picker_index"
-                    [formControlName]="'pgmDate' + index"
+                    [formControlName]="'pgmDate_' + index"
                 />
                 <mat-datepicker-toggle
                     matSuffix
@@ -86,26 +86,39 @@
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker_index></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="field" appearance="fill">
-                <mat-label>Indsponibilités des participants</mat-label>
-                <mat-select
-                    [formControlName]="'unavailablePart' + index"
-                    multiple
+            <div class="unavailability_fields">
+                <mat-form-field
+                    class="field unavailability_field"
+                    appearance="fill"
+                    *ngFor="
+                        let role of unavailableParticipantsArray[index];
+                        let index2 = index
+                    "
                 >
-                    <mat-option
-                        *ngFor="let par of participants; let index = index"
-                        [value]="par"
+                    <mat-label>
+                        Indispos pour role {{ index2 + 1 }}
+                    </mat-label>
+                    <mat-select
+                        [formControlName]="
+                            'unavailablePart_' + index + '_' + index2
+                        "
+                        multiple
                     >
-                        {{ par }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+                        <mat-option
+                            *ngFor="let par of participants; let index = index"
+                            [value]="par"
+                        >
+                            {{ par }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
             <mat-form-field class="field" appearance="fill">
                 <mat-label>Nombre de rôles</mat-label>
                 <input
                     matInput
                     placeholder="Nombre de rôles"
-                    [formControlName]="'rolesNumber' + index"
+                    [formControlName]="'rolesNumber_' + index"
                 />
             </mat-form-field>
         </div>
