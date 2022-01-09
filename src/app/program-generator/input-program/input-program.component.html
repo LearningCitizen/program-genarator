@@ -53,13 +53,13 @@
             </mat-form-field>
         </div>
         <button
-            mat-button
+            mat-raised-button
             color="primary"
             class="field"
             (click)="onValidateForm1()"
             [disabled]="form.invalid"
         >
-            Générer
+            Remplir Indisponibilités
         </button>
     </div>
     <div
@@ -95,9 +95,7 @@
                         let index2 = index
                     "
                 >
-                    <mat-label>
-                        Indispos pour role {{ index2 + 1 }}
-                    </mat-label>
+                    <mat-label> Indispos pour role {{ index2 + 1 }} </mat-label>
                     <mat-select
                         [formControlName]="
                             'unavailablePart_' + index + '_' + index2
@@ -122,5 +120,14 @@
                 />
             </mat-form-field>
         </div>
+        <button
+            mat-raised-button
+            color="primary"
+            class="field"
+            (click)="onValidateForm1()"
+            [disabled]="form.invalid"
+        >
+            Générer Programme
+        </button>
     </div>
 </div>
