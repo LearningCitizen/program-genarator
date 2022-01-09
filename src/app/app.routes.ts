@@ -4,11 +4,11 @@ export const AppRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'sono-program-genarator',
+    redirectTo: 'program-genarator',
   },
   {
-    path: 'sono-program-genarator',
+    path: 'program-genarator',
     loadChildren: () => import('./program-generator/program-generator.module').then(m => m.ProgramGeneratorModule),
   },
-  { path: '**', redirectTo: 'sono-program-genarator', pathMatch: 'full' }
+  { path: '**', redirectTo: 'program-genarator', pathMatch: 'full' }
 ];
