@@ -17,4 +17,9 @@ export class InputProgramService {
             LOCALE_FR
         );
     }
+
+    /**TODO */
+    saveInputProgram(input: any){
+
+    }
 }

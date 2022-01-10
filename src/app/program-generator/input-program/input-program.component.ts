@@ -1,5 +1,7 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { addDays } from 'date-fns';
 import { SharedValidators } from 'src/app/shared/utils/shared-validators';
 import {
@@ -39,7 +41,8 @@ export class InputProgramComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private inputProgramService: InputProgramService
+        private inputProgramService: InputProgramService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -185,5 +188,11 @@ export class InputProgramComponent implements OnInit {
                 );
             }
         });
+    }
+
+    /**TODO */
+    onValidateAvailabilityForm(){
+        this.inputProgramService.saveInputProgram({})
+        this.router.navigate(['program-genarator/generator'])
     }
 }
