@@ -62,7 +62,7 @@ export class InputProgramComponent implements OnInit {
             },
             {
                 validators: [],
-                updateOn: 'blur',
+                updateOn: 'change',
             }
         );
     }
@@ -76,7 +76,6 @@ export class InputProgramComponent implements OnInit {
             this.initAvailabilityForm();
             this.title = 'Indisponibilités des participants';
             this.displayForm = AVAILABILITY_FORM;
-            console.log('partici prop : ' + JSON.stringify(this.participants));
         }
     }
 
@@ -119,9 +118,13 @@ export class InputProgramComponent implements OnInit {
             {},
             {
                 validators: [],
-                updateOn: 'blur',
+                updateOn: 'change',
             }
         );
+        this.addControlsToAvailabilityForm();
+    }
+
+    addControlsToAvailabilityForm() {
         this.programDates.forEach((pgmDate, index) => {
             this.form.addControl(`pgmDate_${index}`, this.fb.control(pgmDate));
             this.form.addControl(
@@ -136,6 +139,11 @@ export class InputProgramComponent implements OnInit {
                         this.fb.control([])
                     )
             );
+            this.form
+                .get(`rolesNumber_${index}`)
+                ?.valueChanges.subscribe((newRolesNumber) =>
+                    this.onRolesChanges(index, newRolesNumber)
+                );
         });
     }
 
@@ -147,11 +155,35 @@ export class InputProgramComponent implements OnInit {
         });
     }
 
-    arrayOfRolesByDate(index: number) {
-        return Array(this.rolesByDates[index]);
+    onRolesChanges(index: number, newRolesNumber: number) {
+        this.updateUnavailableControlsOnRolesChange(index, newRolesNumber);
+        this.rolesByDates[index] = newRolesNumber;
+        this.unavailableParticipantsArray[index] = Array.from({
+            length: newRolesNumber,
+        });
     }
 
-    onRolesChanges(index: number) {
-        this.form.get('rolesNumber_${index}');
+    updateUnavailableControlsOnRolesChange(
+        index: number,
+        newRolesNumber: number
+    ) {
+        const diffNewRoles = newRolesNumber - this.rolesByDates[index];
+        Array.from({ length: Math.abs(diffNewRoles) }).forEach((_, index2) => {
+            if (diffNewRoles > 0) {
+                this.form.addControl(
+                    `unavailablePart_${index}_${
+                        this.rolesByDates[index] + index2
+                    }`,
+                    this.fb.control([])
+                );
+            }
+            if (diffNewRoles < 0) {
+                this.form.removeControl(
+                    `unavailablePart_${index}_${
+                        this.rolesByDates[index] - 1 - index2
+                    }`
+                );
+            }
+        });
     }
 }
