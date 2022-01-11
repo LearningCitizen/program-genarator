@@ -8,6 +8,7 @@ import {
     AVAILABILITY_FORM,
     END_FORM_CONTROL,
     INITIAL_FORM,
+    InputProgramGenerator,
     PARTICIPANTS_FORM_CONTROL,
     RANGE_DATE_FORM_GROUP,
     ROLES_NUMBER_FORM_CONTROL,
@@ -36,7 +37,7 @@ export class InputProgramComponent implements OnInit {
     participants: Array<string> = [];
     title = 'Informations initiales du programme';
     rolesByDates: Array<number> = [];
-    unavailableParticipantsArray: any[] = [];
+    unavailableParticipantsArray: number[][] = [];
     displayForm = INITIAL_FORM;
 
     constructor(
@@ -191,8 +192,31 @@ export class InputProgramComponent implements OnInit {
     }
 
     /**TODO */
-    onValidateAvailabilityForm(){
-        this.inputProgramService.saveInputProgram({})
-        this.router.navigate(['program-genarator/generator'])
+    onValidateAvailabilityForm() {
+        const inputProgramGenerator : InputProgramGenerator = this.getAllAvailabilityFormInputs()
+        this.inputProgramService.saveInputProgram(inputProgramGenerator);
+        this.router.navigate(['program-genarator/generator']);
+    }
+
+    getAllAvailabilityFormInputs() : InputProgramGenerator {
+        let unavailabilityList: string[][][] = [];
+        let unavailableRole: string[][];
+        let pgmDatesList: Date[] = [];
+        this.programDates.forEach((date, i) => {
+            pgmDatesList.push(this.form.get(`pgmDate_${i}`)?.value);
+            unavailableRole = [];
+            this.unavailableParticipantsArray[i].forEach((un, i2) => {
+                unavailableRole.push(
+                    this.form.get(`unavailablePart_${i}_${i2}`)?.value
+                );
+            });
+            unavailabilityList.push(unavailableRole);
+        });
+        return {
+            participants: this.participants,
+            pgmDates: pgmDatesList,
+            roles: this.rolesByDates,
+            unavailabilitiy: unavailabilityList,
+        };
     }
 }

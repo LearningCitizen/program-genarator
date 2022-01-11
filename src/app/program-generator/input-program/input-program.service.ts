@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { LOCALE_FR } from 'src/app/app-constantes';
-import { DATE_FORMAT_FR } from './input-program-constantes';
+import { DATE_FORMAT_FR, InputProgramGenerator } from './input-program-constantes';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +19,7 @@ export class InputProgramService {
     }
 
     /**TODO */
-    saveInputProgram(input: any){
-
+    saveInputProgram(input: InputProgramGenerator){
+        
     }
 }
