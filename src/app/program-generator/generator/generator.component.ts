@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InputProgramService } from '../input-program/input-program.service';
 
 @Component({
   selector: 'app-generator',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneratorComponent implements OnInit {
 
-  constructor() { }
+  programGenerated : any
+  constructor(private inputProgramService: InputProgramService) { }
 
   ngOnInit(): void {
   }
