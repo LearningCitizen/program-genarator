@@ -10,6 +10,8 @@ import { InputProgramService } from '../input-program/input-program.service';
 export class GeneratorComponent implements OnInit {
     programGenerated: any;
     inputProgram: InputProgramGenerator | undefined = undefined;
+    participantsCounter: Map<string, number> = new Map<string, number>();
+
     constructor(private inputProgramService: InputProgramService) {}
 
     ngOnInit(): void {
@@ -19,5 +21,13 @@ export class GeneratorComponent implements OnInit {
         });
     }
 
-    generateProgram() {}
+    generateProgram() {
+        this.initParticipantsCounter();
+    }
+
+    initParticipantsCounter() {
+        this.inputProgram?.participants.forEach((par) =>
+            this.participantsCounter.set(par, 0)
+        );
+    }
 }
