@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { GeneratorComponent } from './generator/generator.component';
 import { InputProgramComponent } from './input-program/input-program.component';
 import { ProgramGeneratorRoutes } from './program-generator.routes';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     declarations: [InputProgramComponent, GeneratorComponent],
@@ -24,6 +25,7 @@ import { ProgramGeneratorRoutes } from './program-generator.routes';
         MatButtonModule,
         ReactiveFormsModule,
         MatSelectModule,
+        MatTableModule,
     ],
     providers: [FormBuilder],
 })

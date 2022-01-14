@@ -2,15 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { InputProgramGenerator } from '../input-program/input-program-constantes';
 import { InputProgramService } from '../input-program/input-program.service';
 
+type ProgramAssignment = {
+    date: Date;
+};
+
 @Component({
     selector: 'app-generator',
     templateUrl: './generator.component.html',
     styleUrls: ['./generator.component.sass'],
 })
 export class GeneratorComponent implements OnInit {
-    programGenerated: any;
+    programGenerated: ProgramAssignment[] = [];
     inputProgram: InputProgramGenerator | undefined = undefined;
     participantsCounter: Map<string, number> = new Map<string, number>();
+    columnsToDisplay = ['date'];
 
     constructor(private inputProgramService: InputProgramService) {}
 
@@ -23,6 +28,9 @@ export class GeneratorComponent implements OnInit {
 
     generateProgram() {
         this.initParticipantsCounter();
+        this.inputProgram?.pgmDates.forEach((pgmDate) =>
+            this.programGenerated.push({ date: pgmDate })
+        );
     }
 
     initParticipantsCounter() {
