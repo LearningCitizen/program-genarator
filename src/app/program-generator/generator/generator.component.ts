@@ -4,12 +4,14 @@ import { InputProgramService } from '../input-program/input-program.service';
 import {
     DATE_COLUMN,
     PARTICIPANTS_UNAVAILABLE,
+    PARTICIPANT_COLUMN,
     ROLE_COLUMN,
 } from './generator-constantes';
 
 type ProgramAssignment = {
     date: Date;
     roles: string[];
+    participants: string[]
 };
 
 @Component({
@@ -21,7 +23,7 @@ export class GeneratorComponent implements OnInit {
     programGenerated: ProgramAssignment[] = [];
     inputProgram: InputProgramGenerator | undefined = undefined;
     participantsCounter: Map<string, number> = new Map<string, number>();
-    columnsToDisplay = [DATE_COLUMN, ROLE_COLUMN];
+    columnsToDisplay = [DATE_COLUMN, ROLE_COLUMN, PARTICIPANT_COLUMN];
 
     constructor(private inputProgramService: InputProgramService) {}
 
@@ -48,6 +50,7 @@ export class GeneratorComponent implements OnInit {
             this.programGenerated.push({
                 date: pgmDate,
                 roles: rolesForCurrentDate,
+                participants: participantForCurrentDate
             });
         });
     }

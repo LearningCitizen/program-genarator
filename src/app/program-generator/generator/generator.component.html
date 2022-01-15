@@ -8,13 +8,25 @@
         </td>
     </ng-container>
 
-    <!-- Rôles Column -->
-    <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef>Rôle</th>
+    <!-- Rôle Column -->
+    <ng-container matColumnDef="roles">
+        <th mat-header-cell *matHeaderCellDef>Rôles</th>
         <td mat-cell *matCellDef="let element">
             <mat-list>
                 <mat-list-item *ngFor="let role of element.roles">
                     {{ role }}
+                </mat-list-item>
+            </mat-list>
+        </td>
+    </ng-container>
+
+    <!-- Partcipant Column -->
+    <ng-container matColumnDef="participants">
+        <th mat-header-cell *matHeaderCellDef>Participants</th>
+        <td mat-cell *matCellDef="let element">
+            <mat-list>
+                <mat-list-item *ngFor="let par of element.participants">
+                    {{ par }}
                 </mat-list-item>
             </mat-list>
         </td>
