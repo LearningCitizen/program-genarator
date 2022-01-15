@@ -12,6 +12,7 @@ import { GeneratorComponent } from './generator/generator.component';
 import { InputProgramComponent } from './input-program/input-program.component';
 import { ProgramGeneratorRoutes } from './program-generator.routes';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     declarations: [InputProgramComponent, GeneratorComponent],
@@ -26,6 +27,7 @@ import { MatTableModule } from '@angular/material/table';
         ReactiveFormsModule,
         MatSelectModule,
         MatTableModule,
+        MatListModule,
     ],
     providers: [FormBuilder],
 })

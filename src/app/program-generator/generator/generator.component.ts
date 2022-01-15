@@ -4,6 +4,7 @@ import { InputProgramService } from '../input-program/input-program.service';
 
 type ProgramAssignment = {
     date: Date;
+    roles: string[]
 };
 
 @Component({
@@ -15,7 +16,7 @@ export class GeneratorComponent implements OnInit {
     programGenerated: ProgramAssignment[] = [];
     inputProgram: InputProgramGenerator | undefined = undefined;
     participantsCounter: Map<string, number> = new Map<string, number>();
-    columnsToDisplay = ['date'];
+    columnsToDisplay = ['date', 'role'];
 
     constructor(private inputProgramService: InputProgramService) {}
 
@@ -28,9 +29,14 @@ export class GeneratorComponent implements OnInit {
 
     generateProgram() {
         this.initParticipantsCounter();
-        this.inputProgram?.pgmDates.forEach((pgmDate) =>
-            this.programGenerated.push({ date: pgmDate })
-        );
+        let rolesForCurrentDate: string[];
+        this.inputProgram?.pgmDates.forEach((pgmDate, i) => {
+            rolesForCurrentDate = [];
+            Array.from({ length: this.inputProgram?.roles[i] ?? 0 }).forEach(
+                (_, i2) => {rolesForCurrentDate.push(`Rôle ${i2+1}`)}
+            );
+            this.programGenerated.push({ date: pgmDate, roles: rolesForCurrentDate });
+        });
     }
 
     initParticipantsCounter() {

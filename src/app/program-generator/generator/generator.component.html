@@ -3,7 +3,21 @@
     <!-- Date Column -->
     <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let element">{{ element.date | date : 'fullDate':undefined:'fr' }}</td>
+        <td mat-cell *matCellDef="let element">
+            {{ element.date | date: 'fullDate':undefined:'fr' }}
+        </td>
+    </ng-container>
+
+    <!-- Rôles Column -->
+    <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Rôle</th>
+        <td mat-cell *matCellDef="let element">
+            <mat-list>
+                <mat-list-item *ngFor="let role of element.roles">
+                    {{ role }}
+                </mat-list-item>
+            </mat-list>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
