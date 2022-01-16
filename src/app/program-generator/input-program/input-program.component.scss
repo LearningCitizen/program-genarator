@@ -1,0 +1,18 @@
+.div_row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.unavailability_fields {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+}
+    
+.content{
+    margin: 10px;
+}
+
+.field {
+    margin: 10px;
+}

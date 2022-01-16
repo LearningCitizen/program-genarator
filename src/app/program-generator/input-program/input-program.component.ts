@@ -20,7 +20,7 @@ import { InputProgramService } from './input-program.service';
 @Component({
     selector: 'app-input-program',
     templateUrl: './input-program.component.html',
-    styleUrls: ['./input-program.component.sass'],
+    styleUrls: ['./input-program.component.scss'],
 })
 export class InputProgramComponent implements OnInit {
     form!: FormGroup;

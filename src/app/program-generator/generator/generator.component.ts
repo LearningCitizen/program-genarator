@@ -17,7 +17,7 @@ type ProgramAssignment = {
 @Component({
     selector: 'app-generator',
     templateUrl: './generator.component.html',
-    styleUrls: ['./generator.component.sass'],
+    styleUrls: ['./generator.component.scss'],
 })
 export class GeneratorComponent implements OnInit {
     programGenerated: ProgramAssignment[] = [];
