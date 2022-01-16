@@ -13,6 +13,7 @@ import { InputProgramComponent } from './input-program/input-program.component';
 import { ProgramGeneratorRoutes } from './program-generator.routes';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     declarations: [InputProgramComponent, GeneratorComponent],
@@ -28,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
         MatSelectModule,
         MatTableModule,
         MatListModule,
+        MatCardModule,
     ],
     providers: [FormBuilder],
 })
