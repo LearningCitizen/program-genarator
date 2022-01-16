@@ -1,5 +1,5 @@
 <mat-card class="content_input">
-    <h1>{{ title }}</h1>
+    <mat-card-title>{{ title }}</mat-card-title>
     <div *ngIf="displayForm == 'initial'">
         <div [formGroup]="form" novalidate id="initialForm">
             <div class="div_row">
@@ -59,7 +59,7 @@
         </div>
         <button
             mat-raised-button
-            color="primary"
+            color="accent"
             class="field"
             (click)="onValidateForm1()"
             [disabled]="form.invalid"
@@ -128,7 +128,7 @@
         </div>
         <button
             mat-raised-button
-            color="primary"
+            color="accent"
             class="field"
             (click)="onValidateAvailabilityForm()"
             [disabled]="form.invalid"

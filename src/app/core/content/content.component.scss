@@ -1,6 +1,9 @@
+@import "src/assets/styles/variables.scss";
+
 .content {
     padding: 20px;
     display: flex;
     justify-content: center;
     min-height: 500px;
+    background-color: $light-primary;
 }

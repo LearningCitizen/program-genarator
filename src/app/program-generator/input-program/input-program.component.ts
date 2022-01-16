@@ -195,7 +195,7 @@ export class InputProgramComponent implements OnInit {
     onValidateAvailabilityForm() {
         const inputProgramGenerator : InputProgramGenerator = this.getAllAvailabilityFormInputs()
         this.inputProgramService.saveInputProgram(inputProgramGenerator);
-        this.router.navigate(['program-genarator/generator']);
+        this.router.navigate(['program-generator/generator']);
     }
 
     getAllAvailabilityFormInputs() : InputProgramGenerator {
