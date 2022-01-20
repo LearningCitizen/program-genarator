@@ -11,7 +11,7 @@ import {
 type ProgramAssignment = {
     date: Date;
     roles: string[];
-    participants: string[]
+    participants: string[];
 };
 
 @Component({
@@ -44,13 +44,15 @@ export class GeneratorComponent implements OnInit {
             Array.from({ length: this.inputProgram?.roles[i] ?? 0 }).forEach(
                 (_, i2) => {
                     rolesForCurrentDate.push(`Rôle ${i2 + 1}`);
-                    participantForCurrentDate.push(this.getParticipantWithMinimumAssignments(i, i2))
+                    participantForCurrentDate.push(
+                        this.getParticipantWithMinimumAssignments(i, i2)
+                    );
                 }
             );
             this.programGenerated.push({
                 date: pgmDate,
                 roles: rolesForCurrentDate,
-                participants: participantForCurrentDate
+                participants: participantForCurrentDate,
             });
         });
     }
@@ -80,6 +82,14 @@ export class GeneratorComponent implements OnInit {
                     minParticipant = parAvail;
                     minAssignments = parAssignments;
                 }
+                if (
+                    parAssignments == minAssignments &&
+                    this.lastIndexOfProgram(parAvail) <
+                        this.lastIndexOfProgram(minParticipant)
+                ) {
+                    minParticipant = parAvail;
+                    minAssignments = parAssignments;
+                }
             });
             if (minParticipant !== PARTICIPANTS_UNAVAILABLE) {
                 const nbAssignments =
@@ -89,6 +99,16 @@ export class GeneratorComponent implements OnInit {
             this.inputProgram?.unavailabilitiy[index][index2];
         }
         return minParticipant;
+    }
+
+    lastIndexOfProgram(participant: string) {
+        let index = -1;
+        this.programGenerated.forEach((progAss, i) => {
+            if (progAss.participants.includes(participant)) {
+                index = i;
+            }
+        });
+        return index;
     }
 
     getAvailableParticipants(unavailableParticipants: string[]): string[] {
