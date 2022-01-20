@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { InputProgramGenerator } from '../input-program/input-program-constantes';
 import { InputProgramService } from '../input-program/input-program.service';
 import {
+    ASSIGNMENTS_COLUMN,
     DATE_COLUMN,
+    PARTICIPANTS_COLUMN,
     PARTICIPANTS_UNAVAILABLE,
-    PARTICIPANT_COLUMN,
-    ROLE_COLUMN,
+    ROLES_COLUMN,
 } from './generator-constantes';
 
 type ProgramAssignment = {
@@ -13,7 +14,10 @@ type ProgramAssignment = {
     roles: string[];
     participants: string[];
 };
-
+type StatisticAssignment = {
+    participant: string;
+    assignments: number;
+};
 @Component({
     selector: 'app-generator',
     templateUrl: './generator.component.html',
@@ -21,9 +25,11 @@ type ProgramAssignment = {
 })
 export class GeneratorComponent implements OnInit {
     programGenerated: ProgramAssignment[] = [];
+    programStatistics: StatisticAssignment[] = [];
     inputProgram: InputProgramGenerator | undefined = undefined;
     participantsCounter: Map<string, number> = new Map<string, number>();
-    columnsToDisplay = [DATE_COLUMN, ROLE_COLUMN, PARTICIPANT_COLUMN];
+    columnsProgramsToDisplay = [DATE_COLUMN, ROLES_COLUMN, PARTICIPANTS_COLUMN];
+    columnsStatisticsToDisplay = [PARTICIPANTS_COLUMN, ASSIGNMENTS_COLUMN];
 
     constructor(private inputProgramService: InputProgramService) {}
 
@@ -31,6 +37,7 @@ export class GeneratorComponent implements OnInit {
         this.inputProgramService.inputProgramGenerator$.subscribe((input) => {
             this.inputProgram = input;
             this.generateProgram();
+            this.generateProgramStatistics();
         });
     }
 
@@ -117,5 +124,20 @@ export class GeneratorComponent implements OnInit {
                   (par) => !unavailableParticipants.includes(par)
               )
             : [];
+    }
+
+    generateProgramStatistics() {
+        this.inputProgram?.participants.forEach((par) =>
+            this.programStatistics.push({
+                participant: par,
+                assignments: this.participantsCounter.get(par) ?? 0,
+            })
+        );
+        this.programStatistics.sort((a, b) => {
+            if (a.assignments == b.assignments) {
+                return a.participant.localeCompare(b.participant);
+            }
+            return a.assignments > b.assignments ? -1 : 1;
+        });
     }
 }
