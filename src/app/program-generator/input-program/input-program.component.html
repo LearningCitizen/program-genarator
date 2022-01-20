@@ -57,15 +57,17 @@
                 </mat-form-field>
             </div>
         </div>
-        <button
-            mat-raised-button
-            color="accent"
-            class="field"
-            (click)="onValidateForm1()"
-            [disabled]="form.invalid"
-        >
-            Remplir Indisponibilités
-        </button>
+        <div class="div_button">
+            <button
+                mat-raised-button
+                color="accent"
+                class="field"
+                (click)="onValidateForm1()"
+                [disabled]="form.invalid"
+            >
+                Remplir Indisponibilités
+            </button>
+        </div>
     </div>
     <div
         *ngIf="displayForm == 'availability'"
@@ -126,14 +128,16 @@
                 />
             </mat-form-field>
         </div>
-        <button
-            mat-raised-button
-            color="accent"
-            class="field"
-            (click)="onValidateAvailabilityForm()"
-            [disabled]="form.invalid"
-        >
-            Générer Programme
-        </button>
+        <div class="div_button">
+            <button
+                mat-raised-button
+                color="accent"
+                class="field"
+                (click)="onValidateAvailabilityForm()"
+                [disabled]="form.invalid"
+            >
+                Générer Programme
+            </button>
+        </div>
     </div>
 </mat-card>
