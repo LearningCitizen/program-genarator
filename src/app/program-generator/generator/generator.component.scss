@@ -1,7 +1,15 @@
-.table_pgm {
-    margin: 10px;
+.table {
+    margin: 20px;
 }
 
 mat-card-title {
     text-align: center;
+}
+
+.mat-header-row {
+    background-color: #1a237e;
+}
+
+.mat-header-cell{
+    color: white;
 }

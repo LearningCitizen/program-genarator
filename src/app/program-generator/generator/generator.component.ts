@@ -30,6 +30,7 @@ export class GeneratorComponent implements OnInit {
     participantsCounter: Map<string, number> = new Map<string, number>();
     columnsProgramsToDisplay = [DATE_COLUMN, ROLES_COLUMN, PARTICIPANTS_COLUMN];
     columnsStatisticsToDisplay = [PARTICIPANTS_COLUMN, ASSIGNMENTS_COLUMN];
+    orderParAssignments: string[] = [];
 
     constructor(private inputProgramService: InputProgramService) {}
 
@@ -91,8 +92,8 @@ export class GeneratorComponent implements OnInit {
                 }
                 if (
                     parAssignments == minAssignments &&
-                    this.lastIndexOfProgram(parAvail) <
-                        this.lastIndexOfProgram(minParticipant)
+                    this.orderParAssignments.lastIndexOf(parAvail) <
+                        this.orderParAssignments.lastIndexOf(minParticipant)
                 ) {
                     minParticipant = parAvail;
                     minAssignments = parAssignments;
@@ -105,17 +106,10 @@ export class GeneratorComponent implements OnInit {
             }
             this.inputProgram?.unavailabilitiy[index][index2];
         }
+        if (minParticipant != PARTICIPANTS_UNAVAILABLE) {
+            this.orderParAssignments.push(minParticipant);
+        }
         return minParticipant;
-    }
-
-    lastIndexOfProgram(participant: string) {
-        let index = -1;
-        this.programGenerated.forEach((progAss, i) => {
-            if (progAss.participants.includes(participant)) {
-                index = i;
-            }
-        });
-        return index;
     }
 
     getAvailableParticipants(unavailableParticipants: string[]): string[] {

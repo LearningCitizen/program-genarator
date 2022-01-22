@@ -77,7 +77,11 @@
         class="form1"
     >
         <div
-            *ngFor="let progDate of programDates; let index = index"
+            *ngFor="
+                let progDate of programDates;
+                let index = index;
+                first as isFirst
+            "
             class="div_row"
         >
             <mat-form-field class="field" appearance="fill">
@@ -117,6 +121,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <mat-divider *ngIf="!isFirst"></mat-divider>
             </div>
             <mat-form-field class="field" appearance="fill">
                 <mat-label>Nombre de rôles</mat-label>
