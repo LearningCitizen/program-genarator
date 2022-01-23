@@ -12,4 +12,14 @@ mat-card-title {
 
 .mat-header-cell{
     color: white;
+    padding: 10px;
+}
+
+.container-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.title_table{
+    margin: 10px 20px 10px 20px;
 }
